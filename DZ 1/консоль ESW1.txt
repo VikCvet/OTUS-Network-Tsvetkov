@@ -1,0 +1,73 @@
+Настройка ESW1:
+
+ESW1#vlan database
+ESW1(vlan)#vlan 10
+ESW1(vlan)#vlan 20
+ESW1(vlan)#vlan 30
+ESW1(vlan)#exit
+
+ESW1#configure terminal
+
+ESW1(config)#interface vlan 10
+ESW1(config-if)#description FIN OTD
+ESW1(config-if)#no shutdown
+ESW1(config-if)#exit
+
+ESW1(config)#interface vlan 20
+ESW1(config-if)#description SALE OTD
+ESW1(config-if)#no shutdown
+ESW1(config-if)#exit
+
+ESW1(config)#interface vlan 30
+ESW1(config-if)#description ADMIN
+ESW1(config-if)#ip address 198.130.2.3 255.255.255.0
+ESW1(config-if)#no shutdown
+ESW1(config-if)#exit
+
+ESW1(config)#interface vlan 40
+ESW1(config-if)#description PARKING
+ESW1(config-if)#no shutdown
+ESW1(config-if)#exit
+
+ESW1(config)#ip default-gateway 198.130.2.1
+
+ESW1(config)#int range fastEthernet 1/2 - 13
+ESW1(config-if-range)#switchport mode access
+ESW1(config-if-range)#switchport access vlan 40
+ESW1(config-if-range)#description PARKING
+ESW1(config-if-range)#shutdown
+ESW1(config-if-range)#exit
+
+ESW1(config)#int fastEthernet 1/0
+ESW1(config-if)#switchport mode access
+ESW1(config-if)#switchport access vlan 10
+ESW1(config-if)#description PC1
+ESW1(config-if)#no shutdown
+ESW1(config-if)#exit
+
+ESW1(config)#int fastEthernet 1/1
+ESW1(config-if)#switchport mode access
+ESW1(config-if)#switchport access vlan 20
+ESW1(config-if)#description PC3
+ESW1(config-if)#no shutdown
+ESW1(config-if)#exit
+
+ESW1(config)#interface fastEthernet 1/14
+ESW1(config-if)#switchport trunk encapsulation dot1q
+ESW1(config-if)#switchport mode trunk
+ESW1(config-if)#switchport trunk allowed vlan 1-2,10,20,30,1002-1005
+ESW1(config-if)#description to R1
+ESW1(config-if)#no shutdown
+ESW1(config-if)#exit
+
+ESW1(config)#interface fastEthernet 1/15
+ESW1(config-if)#switchport trunk encapsulation dot1q
+ESW1(config-if)#switchport mode trunk
+ESW1(config-if)#switchport trunk allowed vlan 1-2,10,20,30,1002-1005
+ESW1(config-if)#description to ESW2
+ESW1(config-if)#no shutdown
+ESW1(config-if)#exit
+
+ESW1(config)#exit
+ESW1#write memory
+ESW1#
