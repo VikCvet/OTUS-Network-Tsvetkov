@@ -1,0 +1,58 @@
+PC2>
+PC2> dhcp -d
+Opcode: 1 (REQUEST)
+Client IP Address: 0.0.0.0
+Your IP Address: 0.0.0.0
+Server IP Address: 0.0.0.0
+Gateway IP Address: 0.0.0.0
+Client MAC Address: 00:50:79:66:68:01
+Option 53: Message Type = Discover
+Option 12: Host Name = PC21
+Option 61: Client Identifier = Hardware Type=Ethernet MAC Address = 00:50:79:66:68:01
+
+Opcode: 2 (REPLY)
+Client IP Address: 0.0.0.0
+Your IP Address: 192.168.1.102
+Server IP Address: 0.0.0.0
+Gateway IP Address: 192.168.1.97
+Client MAC Address: 00:50:79:66:68:01
+Option 53: Message Type = Offer
+Option 54: DHCP Server = 10.0.0.1
+Option 51: Lease Time = 217753
+Option 58: Renewal Time = 108876
+Option 59: Rebinding Time = 190533
+Option 1: Subnet Mask = 255.255.255.240
+Option 15: Domain = ccna-lab.com
+Option 3: Router = 192.168.1.97
+
+Opcode: 1 (REQUEST)
+Client IP Address: 192.168.1.102
+Your IP Address: 0.0.0.0
+Server IP Address: 0.0.0.0
+Gateway IP Address: 0.0.0.0
+Client MAC Address: 00:50:79:66:68:01
+Option 53: Message Type = Request
+Option 54: DHCP Server = 10.0.0.1
+Option 50: Requested IP Address = 192.168.1.102
+Option 61: Client Identifier = Hardware Type=Ethernet MAC Address = 00:50:79:66:68:01
+Option 12: Host Name = PC21
+
+Opcode: 2 (REPLY)
+Client IP Address: 192.168.1.102
+Your IP Address: 192.168.1.102
+Server IP Address: 0.0.0.0
+Gateway IP Address: 192.168.1.97
+Client MAC Address: 00:50:79:66:68:01
+Option 53: Message Type = Ack
+Option 54: DHCP Server = 10.0.0.1
+Option 51: Lease Time = 217800
+Option 58: Renewal Time = 108900
+Option 59: Rebinding Time = 190575
+Option 1: Subnet Mask = 255.255.255.240
+Option 15: Domain = ccna-lab.com
+Option 3: Router = 192.168.1.97
+
+ IP 192.168.1.102/28 GW 192.168.1.97
+
+PC2>
+PC2>

@@ -1,0 +1,150 @@
+R1#sh run
+Building configuration...
+
+Current configuration : 1641 bytes
+!
+version 12.3
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname R1
+!
+boot-start-marker
+boot-end-marker
+!
+!
+no aaa new-model
+ip subnet-zero
+no ip icmp rate-limit unreachable
+!
+!
+ip cef
+ip tcp synwait-time 5
+no ip domain lookup
+ip dhcp excluded-address 192.168.1.1 192.168.1.5
+ip dhcp excluded-address 192.168.1.97 192.168.1.101
+ip dhcp excluded-address 192.168.1.65 192.168.1.70
+!
+ip dhcp pool Network-A
+   network 192.168.1.0 255.255.255.192
+   domain-name ccna-lab.com
+   default-router 192.168.1.1
+   lease 2 12 30
+!
+ip dhcp pool R2_Client-LAN
+   network 192.168.1.96 255.255.255.240
+   domain-name ccna-lab.com
+   default-router 192.168.1.97
+   lease 2 12 30
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface FastEthernet0/0
+ description to R2
+ ip address 10.0.0.1 255.255.255.252
+ duplex auto
+ speed auto
+!
+interface FastEthernet0/1
+ no ip address
+ duplex auto
+ speed auto
+!
+interface FastEthernet0/1.100
+ description Clients
+ encapsulation dot1Q 100
+ ip address 192.168.1.1 255.255.255.192
+!
+interface FastEthernet0/1.200
+ description Management
+ encapsulation dot1Q 200
+ ip address 192.168.1.65 255.255.255.224
+!
+interface FastEthernet1/0
+ no ip address
+ shutdown
+ duplex auto
+ speed auto
+!
+interface FastEthernet1/1
+ no ip address
+ shutdown
+ duplex auto
+ speed auto
+!
+ip classless
+ip route 0.0.0.0 0.0.0.0 10.0.0.2
+no ip http server
+!
+!
+no cdp log mismatch duplex
+!
+!
+!
+!
+!
+!
+!
+line con 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+ stopbits 1
+line aux 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+ stopbits 1
+line vty 0 4
+ login
+!
+!
+end
+
+R1#
+R1#sh ip dhcp bind
+R1#sh ip dhcp binding
+Bindings from all pools not associated with VRF:
+IP address          Client-ID/              Lease expiration        Type
+                    Hardware address/
+                    User name
+192.168.1.6         0100.5079.6668.00       Jan 09 2025 08:40 AM    Automatic
+192.168.1.102       0100.5079.6668.01       Jan 09 2025 08:36 AM    Automatic
+R1#
+R1#sh ip dhcp pool
+
+Pool Network-A :
+ Utilization mark (high/low)    : 100 / 0
+ Subnet size (first/next)       : 0 / 0
+ Total addresses                : 62
+ Leased addresses               : 1
+ Pending event                  : none
+ 1 subnet is currently in the pool :
+ Current index        IP address range                    Leased addresses
+ 192.168.1.7          192.168.1.1      - 192.168.1.62      1
+
+Pool R2_Client-LAN :
+ Utilization mark (high/low)    : 100 / 0
+ Subnet size (first/next)       : 0 / 0
+ Total addresses                : 14
+ Leased addresses               : 1
+ Pending event                  : none
+ 1 subnet is currently in the pool :
+ Current index        IP address range                    Leased addresses
+ 192.168.1.103        192.168.1.97     - 192.168.1.110     1
+R1#
+
