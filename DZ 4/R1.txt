@@ -1,0 +1,41 @@
+
+interface Loopback0
+ description Loopback 0 R1
+ ip address 172.16.15.1 255.255.255.255
+!
+interface FastEthernet0/0
+ description to R5 fa1/0
+ ip address 172.16.5.21 255.255.255.252
+ duplex auto
+ speed auto
+!
+interface FastEthernet0/1
+ description to R6 fa1/1
+ ip address 172.16.5.25 255.255.255.252
+ duplex auto
+ speed auto
+!
+interface FastEthernet1/0
+ description to DSW1 fa0/0
+ ip address 172.16.5.1 255.255.255.252
+ duplex auto
+ speed auto
+!
+interface FastEthernet1/1
+ description to DSW2 fa0/1
+ ip address 172.16.5.5 255.255.255.252
+ duplex auto
+ speed auto
+!
+interface FastEthernet2/0
+ description to R2 fa2/0
+ ip address 172.16.5.17 255.255.255.252
+ duplex full
+ vrrp 1 ip 172.16.5.17
+!
+router ospf 1
+ router-id 172.16.15.1
+ log-adjacency-changes
+ network 172.16.5.16 0.0.0.3 area 0
+ network 172.16.15.1 0.0.0.0 area 0
+ neighbor 172.16.15.2

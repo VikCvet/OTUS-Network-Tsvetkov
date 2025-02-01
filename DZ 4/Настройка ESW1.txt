@@ -1,0 +1,57 @@
+
+interface FastEthernet0/0
+ description *** Unused for Layer2 EtherSwitch ***
+ no ip address
+ no ip route-cache
+ shutdown
+ duplex auto
+ speed auto
+!
+interface FastEthernet0/1
+ description *** Unused for Layer2 EtherSwitch ***
+ no ip address
+ no ip route-cache
+ shutdown
+ duplex auto
+ speed auto
+!
+interface FastEthernet1/0
+ description to DSW1 fa1/2
+ switchport trunk allowed vlan 1,2,10,11,50,1002-1005
+ switchport mode trunk
+ duplex full
+ speed 100
+ spanning-tree vlan 11 cost 19
+!
+interface FastEthernet1/1
+ description to DSW2 fa1/3
+ switchport trunk allowed vlan 1,2,10,11,50,1002-1005
+ switchport mode trunk
+ duplex full
+ speed 100
+ spanning-tree vlan 11 cost 19
+ spanning-tree cost 19
+!
+
+interface FastEthernet1/15
+ description to PC1
+ switchport access vlan 10
+ duplex full
+ speed 100
+!
+interface Vlan1
+ no ip address
+ no ip route-cache
+ shutdown
+!
+interface Vlan10
+ description MSK PC1
+ no ip address
+!
+interface Vlan11
+ description MSK PC2
+ no ip address
+!
+interface Vlan50
+ description Management
+ ip address 172.16.16.2 255.255.255.0
